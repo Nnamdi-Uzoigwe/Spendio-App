@@ -4,7 +4,7 @@ export default function QuickActions() {
     return (
         <div>
             <h5>Quick Actions</h5>
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="mt-6 grid grid-cols-2 gap-4">
                 {/* Add Income */}
                 <div className="border border-gray-300 rounded-lg p-3">   
                     <div className="bg-green-100 cursor-pointer hover:bg-green-200 p-4 rounded-lg flex flex-col items-center">
