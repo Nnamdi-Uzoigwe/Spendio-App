@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function Add() {
     const [activeTab, setActiveTab] = useState("Expense")
     return (
-        <div className="px-6 py-10 mb-30 lg:px-40">
+        <div className="px-4 py-10 mb-30 lg:px-40">
             <header className="flex items-center gap-2">
                 <Link href="/">
                     <ArrowLeft />
@@ -20,7 +20,7 @@ export default function Add() {
             </header>
 
             {/* Tabs */}
-            <div className="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-3">
+            <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {/* Expense */}
                 <div onClick={() => setActiveTab("Expense")} className={`${activeTab === "Expense" ? "bg-black text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
                     <Minus className={`${activeTab === "Expense" ? "text-white" : "text-black"}`} />
