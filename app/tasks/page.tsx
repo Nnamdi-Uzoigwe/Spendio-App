@@ -61,14 +61,14 @@ export default function Tasks() {
             {/* Tab navigation */}
             <div className="mt-10 px-4 lg:px-40">
                 <div className="bg-gray-200 grid p-1 grid-cols-3 gap-1 rounded-[40px] overflow-hidden">
-                    <div onClick={() => setActiveTab("Pending")} className={`${activeTab === "Pending" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center rounded-[40px] text-sm font-semibold`}>Pending (1)</div>
-                    <div onClick={() => setActiveTab("Completed")} className={`${activeTab === "Completed" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center rounded-[40px] text-sm font-semibold`}>Completed (4)</div>
+                    <div onClick={() => setActiveTab("Pending")} className={`${activeTab === "Pending" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center rounded-[40px] text-sm font-semibold`}>Pending (4)</div>
+                    <div onClick={() => setActiveTab("Completed")} className={`${activeTab === "Completed" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center rounded-[40px] text-sm font-semibold`}>Completed (1)</div>
                     <div onClick={() => setActiveTab("All")} className={`${activeTab === "All" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center rounded-[40px] text-sm font-semibold`}>All (5)</div>
                 </div>
             </div>
 
 
-            <div className="mt-10 px-4 lg:px-40">
+            <div className="mt-4 pb-20 px-4 lg:px-40">
                 {activeTab === "Pending" && <PendingTasks />}
                 {activeTab === "Completed" && <CompletedTasks />}
                 {activeTab === "All" && <AllTasks />}
