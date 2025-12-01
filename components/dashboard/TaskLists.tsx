@@ -40,7 +40,7 @@ export default function TaskLists() {
       {/* Transactions */}
       <div className="mt-4 border border-gray-200 overflow-hidden rounded-[20px]">
         {taskList.map((item) => (
-          <div key={item.id} className="flex gap-3 items-center border border-gray-200 p-4">
+          <div key={item.id} className="flex gap-3 items-center border border-gray-200 p-3 lg:p-4">
             <input type="checkbox" defaultChecked={item.isCompleted} />
             <div>
               <h5 className={`mb-2 ${item.isCompleted ? "line-through" : " decoration-0"}`}>{item.taskName}</h5>
