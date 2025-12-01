@@ -1,0 +1,164 @@
+// import { create } from "zustand";
+
+// interface FinanceState {
+//   income: number;
+//   expenses: number;
+//   balance: number;
+//   loading: boolean;
+//   error: string;
+
+//   fetchMonthlyFinance: () => Promise<void>;
+// }
+
+// export const useFinanceStore = create<FinanceState>((set) => ({
+//   income: 0,
+//   expenses: 0,
+//   balance: 0,
+//   loading: false,
+//   error: "",
+
+//   fetchMonthlyFinance: async () => {
+//     try {
+//       set({ loading: true, error: "" });
+
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         set({ error: "Not authenticated", loading: false });
+//         return;
+//       }
+
+//       // Fetch income
+//       const incomeRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/income/monthly`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       });
+//       const incomeData = await incomeRes.json();
+
+//       // Fetch expenses
+//       const expenseRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/expense/monthly`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       });
+//       const expenseData = await expenseRes.json();
+
+//       const income = incomeData.total || 0;
+//       const expenses = expenseData.total || 0;
+//       const balance = income - expenses;
+
+//       set({
+//         income,
+//         expenses,
+//         balance,
+//         loading: false,
+//       });
+//     } catch (error: any) {
+//       console.error(error);
+//       set({ loading: false, error: "Failed to fetch finance data" });
+//     }
+//   },
+// }));
+
+
+import { create } from "zustand";
+
+interface FinanceState {
+  income: number;
+  expenses: number;
+  balance: number;
+  loading: boolean;
+  error: string;
+
+  fetchMonthlyFinance: () => Promise<void>;
+}
+
+// Helper function to decode JWT token
+function decodeToken(token: string) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch (error) {
+    console.error("Failed to decode token:", error);
+    return null;
+  }
+}
+
+export const useFinanceStore = create<FinanceState>((set) => ({
+  income: 0,
+  expenses: 0,
+  balance: 0,
+  loading: false,
+  error: "",
+
+  fetchMonthlyFinance: async () => {
+    try {
+      set({ loading: true, error: "" });
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        set({ error: "Not authenticated", loading: false });
+        return;
+      }
+
+      // Try to get userId from localStorage first (faster)
+      let userId = localStorage.getItem("userId");
+
+      // If not in localStorage, decode from JWT token
+      if (!userId) {
+        const decoded = decodeToken(token);
+        userId = decoded?.userId || decoded?.id || decoded?.sub;
+        
+        if (!userId) {
+          set({ error: "Could not extract userId from token", loading: false });
+          return;
+        }
+      }
+
+      // Fetch income with userId as query parameter
+      const incomeRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/income/monthly?userId=${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      
+      if (!incomeRes.ok) {
+        throw new Error(`Income fetch failed: ${incomeRes.status}`);
+      }
+      
+      const incomeData = await incomeRes.json();
+
+      // Fetch expenses with userId as query parameter
+      const expenseRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/expense/monthly?userId=${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      
+      if (!expenseRes.ok) {
+        throw new Error(`Expense fetch failed: ${expenseRes.status}`);
+      }
+      
+      const expenseData = await expenseRes.json();
+
+      const income = incomeData.total || 0;
+      const expenses = expenseData.total || 0;
+      const balance = income - expenses;
+
+      set({
+        income,
+        expenses,
+        balance,
+        loading: false,
+      });
+    } catch (error: any) {
+      console.error("Finance fetch error:", error);
+      set({ loading: false, error: error.message || "Failed to fetch finance data" });
+    }
+  },
+}));

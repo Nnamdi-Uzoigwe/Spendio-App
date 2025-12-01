@@ -22,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${quicksand.variable} antialiased`}>
-      <Header />
+      {/* <Header /> */}
         {children}
-      <BottomNavbar />
+      {/* <BottomNavbar /> */}
       </body>
     </html>
   );

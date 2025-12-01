@@ -1,4 +1,5 @@
 import BudgetProgress from "./BudgetProgress"
+import IncomeVsExpensesChart from "./IncomeVsExpensesChart"
 
 export default function BudgetOverview() {
     const budgetPrgressData = [
@@ -28,7 +29,9 @@ export default function BudgetOverview() {
         }
     ]
     return (
-        <div className="mt-10 border p-4 mb-20 border-gray-300 rounded-lg">
+        <div className="mb-20">
+            
+        <div className="mt-10 border p-4 mb-10 border-gray-300 rounded-lg">
             Budget Overview
 
             <div className="mt-4 flex flex-col gap-2">
@@ -42,6 +45,8 @@ export default function BudgetOverview() {
                 ))}
             </div>
 
+        </div>
+            <IncomeVsExpensesChart />
         </div>
     )
 }

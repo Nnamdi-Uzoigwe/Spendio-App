@@ -15,22 +15,22 @@ export default function BottomNavbar() {
                 <span>Home</span>
             </Link>
             {/* Analytics */}
-            <Link href="/analytics" onClick={() => setActiveLink("/analytics")} className={`${activeLink === "/analytics" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
+            <Link href="/dashboard/analytics" onClick={() => setActiveLink("/analytics")} className={`${activeLink === "/analytics" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
                 <TrendingUp size={18} />
                 <span>Analytics</span>
             </Link>
             {/* Add */}
-            <Link href="/add" onClick={() => setActiveLink("/add")} className={`${activeLink === "/add" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
+            <Link href="/dashboard/add" onClick={() => setActiveLink("/add")} className={`${activeLink === "/add" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
                 <CirclePlus size={18} />
                 <span>Add</span>
             </Link>
             {/* Tasks */}
-            <Link href="/tasks" onClick={() => setActiveLink("/tasks")} className={`${activeLink === "/tasks" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
+            <Link href="/dashboard/tasks" onClick={() => setActiveLink("/tasks")} className={`${activeLink === "/tasks" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
                 <SquareCheckBig size={18} />
                 <span>Tasks</span>
             </Link>
             {/* Profile */}
-            <Link href="/profile" onClick={()=> setActiveLink("/profile")} className={`${activeLink === "/profile" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
+            <Link href="/dashboard/profile" onClick={()=> setActiveLink("/profile")} className={`${activeLink === "/profile" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} flex w-fit flex-col gap-1 items-center`}>
                 <User size={18} />
                 <span>Profile</span>
             </Link>

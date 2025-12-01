@@ -1,7 +1,18 @@
 import { Bell, ChevronRight, CircleQuestionMark, CreditCard, DollarSign, Download, Lock, Moon, Shield, ToggleLeft, User, Settings, LogOut } from "lucide-react"
 import SettingsCard from "./SettingsCard"
+import { useRouter } from "next/navigation";
 
 export default function Setting() {
+     const router = useRouter();
+
+    const handleLogout = () => {
+        // Clear localStorage
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        
+        // Redirect to login page
+        router.replace("/login");
+    };
     const accountSettingsData = [
         {
             id: 1,
@@ -127,7 +138,7 @@ export default function Setting() {
             </section>
 
             <div className="mt-10 hover:bg-red-100 hover:border-red-100 cursor-pointer border p-3 rounded-md flex justify-center border-gray-300">
-                <button className="flex items-center gap-3">
+                <button onClick={handleLogout} className="flex items-center gap-3">
                     <LogOut size={17} className="text-red-500" />
                     <span className="text-red-500 font-semibold">Sign out</span>
                 </button>

@@ -1,18 +1,26 @@
-import DisplayHeader from "@/components/dashboard/DisplayHeader";
-import ExpenseBoard from "@/components/dashboard/ExpenseBoard";
-import QuickActions from "@/components/dashboard/QuickActions";
-import RecentTransactions from "@/components/dashboard/RecentTransactions";
-import TaskLists from "@/components/dashboard/TaskLists";
-import Image from "next/image";
+// app/page.tsx
+"use client";
 
-export default function Home() {
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function HomePage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if user is authenticated
+    const token = localStorage.getItem("token");
+    
+    if (token) {
+      router.replace("/dashboard");
+    } else {
+      router.replace("/login");
+    }
+  }, [router]);
+
   return (
-    <div className="px-6 lg:px-40 py-10 mb-30 flex flex-col gap-8">
-      <DisplayHeader /> 
-      <ExpenseBoard />
-      <QuickActions />
-      <RecentTransactions />
-      <TaskLists />
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
     </div>
   );
 }

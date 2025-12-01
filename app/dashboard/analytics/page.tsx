@@ -2,6 +2,8 @@
 
 import AnalyticsCard from "@/components/analytics/AnalyticsCard";
 import BudgetOverview from "@/components/analytics/budget/BudgetOverview";
+import ExpenseCategories from "@/components/analytics/categories/ExpenseCategories";
+import SpendingChart from "@/components/analytics/trends/SpendingChart";
 import { ArrowDownLeft, ArrowUpRight, Calendar, TrendingDown, TrendingUp } from "lucide-react";
 import { useState } from "react";
 
@@ -60,6 +62,8 @@ export default function Analytics() {
             <div className="px-4 lg:px-40 pb-20">
 
                 {activeTab === "Overview" && <BudgetOverview />}
+                {activeTab === "Trends" &&  <SpendingChart />}
+                {activeTab === "Categories" &&  <ExpenseCategories />}
             </div>
         </div>
     )
