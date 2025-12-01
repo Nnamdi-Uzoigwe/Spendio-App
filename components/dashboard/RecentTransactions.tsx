@@ -239,22 +239,22 @@ export default function RecentTransactions() {
 
       <div className="border border-gray-200 overflow-hidden rounded-[20px]">
         {recentTransactions.map((item) => (
-          <div key={item.id} className="flex justify-between border-b border-gray-200 p-4 last:border-b-0">
+          <div key={item.id} className="flex justify-between border-b border-gray-200 p-3 lg:p-4 last:border-b-0">
             {/* left */}
             <div className="flex gap-3 items-center">
               <div
-                className={`h-10 w-10 rounded-full flex items-center justify-center ${
+                className={`h-8 lg:h-10 w-8 lg:w-10 rounded-full flex items-center justify-center ${
                   item.isExpense ? "bg-red-100" : "bg-green-100"
                 }`}
               >
                 {item.isExpense ? (
-                  <ArrowUpRight className="text-red-600" />
+                  <ArrowUpRight size={19} className="text-red-600" />
                 ) : (
-                  <ArrowDownLeft className="text-green-600" />
+                  <ArrowDownLeft size={19} className="text-green-600" />
                 )}
               </div>
               <div className="flex flex-col">
-                <h4 className="font-semibold">{item.description}</h4>
+                <h4 className="text-sm lg:text-md font-semibold">{item.description}</h4>
                 <p className="text-sm text-gray-500">{item.category}</p>
               </div>
             </div>
@@ -262,9 +262,9 @@ export default function RecentTransactions() {
             {/* right */}
             <div className="flex flex-col items-end">
               <p className="font-semibold">₦{item.amount.toLocaleString()}</p>
-              <div className="text-sm flex items-center gap-1">
+              <div className="text-sm flex flex-wrap justify-end items-center gap-1">
                 <p>{new Date(item.date).toLocaleDateString()}</p>
-                <Dot className="w-2 h-2" />
+                <Dot className="hidden lg:block w-2 h-2" />
                 <p>{new Date(item.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
               </div>
             </div>

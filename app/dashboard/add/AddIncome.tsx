@@ -1,0 +1,193 @@
+"use client";
+
+import { useState, FormEvent, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
+
+export default function AddIncome() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const [formData, setFormData] = useState({
+    amount: "",
+    description: "",
+    category: "Salary",
+    date: new Date().toISOString().split("T")[0], // Today's date
+  });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    // Validation
+    if (
+      !formData.amount ||
+      !formData.description ||
+      !formData.category ||
+      !formData.date
+    ) {
+      setError("Please fill in all fields");
+      setLoading(false);
+      return;
+    }
+
+    if (parseFloat(formData.amount) <= 0) {
+      setError("Amount must be greater than 0");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Not authenticated");
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/income`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          amount: parseFloat(formData.amount),
+          description: formData.description,
+          category: formData.category,
+          date: formData.date,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to add Income");
+      }
+
+      setSuccess("Income added successfully!");
+
+      // Reset form
+      setFormData({
+        amount: "",
+        description: "",
+        category: "Salary",
+        date: new Date().toISOString().split("T")[0],
+      });
+
+      // Optional: Redirect to dashboard after 2 seconds
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 2000);
+    } catch (err: any) {
+      console.error("Error adding income:", err);
+      setError(err.message || "Failed to add income");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="border border-gray-300 p-4 rounded-md">
+      <h2 className="mb-4 text-xl font-semibold">Add Income page</h2>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md mb-4">
+          {error}
+        </div>
+      )}
+      {success && (
+        <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-md mb-4">
+          {success}
+        </div>
+      )}
+      {/* form */}
+      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+        {/* Amount */}
+        <div className="relative">
+          <p className="font-semibold mb-2">Amount</p>
+          <input
+            type="number"
+            name="amount"
+            value={formData.amount}
+            onChange={handleChange}
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+            className="pl-10 border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            required
+          />
+          <span className="absolute top-[45px] text-lg left-4">₦</span>
+        </div>
+
+        {/* Description */}
+        <div>
+          <p className="font-semibold mb-2">Description</p>
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            placeholder="What was this for?"
+            required
+          />
+        </div>
+
+        {/* Category */}
+        <div>
+          <p className="font-semibold mb-2">Category</p>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            required
+          >
+            <option value="Salary">Salary</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Investment">Investment</option>
+            <option value="Business">Business</option>
+            <option value="Gift">Gift</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        {/* Date */}
+        <div>
+          <p className="font-semibold mb-2">Date</p>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            max={new Date().toISOString().split("T")[0]} // Can't select future dates
+            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="mt-2 rounded-md cursor-pointer p-2 w-full bg-black text-white"
+        >
+          {loading ? "Adding..." : "Add Income"}
+        </button>
+      </form>
+    </div>
+  );
+}
