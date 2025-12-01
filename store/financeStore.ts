@@ -208,7 +208,6 @@
 // }));
 
 
-
 import { create } from "zustand";
 
 interface Transaction {
@@ -226,11 +225,10 @@ interface FinanceState {
   balance: number;
   loading: boolean;
   error: string;
-  transactions: Transaction[];
+  recentTransactions: Transaction[];
 
   fetchMonthlyFinance: () => Promise<void>;
-  addTransaction: (tx: Transaction) => void;
-  latestTransactions: () => Transaction[];
+  fetchRecentTransactions: () => Promise<void>;
 }
 
 function decodeToken(token: string) {
@@ -250,13 +248,13 @@ function decodeToken(token: string) {
   }
 }
 
-export const useFinanceStore = create<FinanceState>((set, get) => ({
+export const useFinanceStore = create<FinanceState>((set) => ({
   income: 0,
   expenses: 0,
   balance: 0,
   loading: false,
   error: "",
-  transactions: [],
+  recentTransactions: [],
 
   fetchMonthlyFinance: async () => {
     // Only run on client
@@ -281,14 +279,20 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
         }
       }
 
-      const incomeRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/income/monthly?userId=${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const incomeRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/income/monthly?userId=${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       const incomeData = await incomeRes.json();
 
-      const expenseRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/expense/monthly?userId=${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const expenseRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/expense/monthly?userId=${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       const expenseData = await expenseRes.json();
 
       const income = incomeData.total || 0;
@@ -298,12 +302,43 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
       set({ income, expenses, balance, loading: false });
     } catch (error: any) {
       console.error("Finance fetch error:", error);
-      set({ loading: false, error: error.message || "Failed to fetch finance data" });
+      set({
+        loading: false,
+        error: error.message || "Failed to fetch finance data",
+      });
     }
   },
+fetchRecentTransactions: async () => {
+    if (typeof window === "undefined") return;
 
-  addTransaction: (tx: Transaction) =>
-    set((state) => ({ transactions: [tx, ...state.transactions] })),
+    try {
+      const token = localStorage.getItem("token");
 
-  latestTransactions: () => get().transactions.slice(0, 5),
+      if (!token) {
+        console.warn("No token found");
+        return;
+      }
+
+      console.log("🔍 Fetching recent transactions..."); // Debug log
+
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/transactions/recent`, // ✅ NO userId query param
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const data = await res.json();
+      console.log("📦 API Response:", data); // Debug log
+
+      if (data.success) {
+        set({ recentTransactions: data.data });
+        console.log("✅ Transactions loaded:", data.data.length);
+      } else {
+        console.error("❌ API returned failure:", data.message);
+      }
+    } catch (error) {
+      console.error("❌ Failed to fetch recent transactions:", error);
+    }
+  },
 }));
