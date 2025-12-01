@@ -68,7 +68,7 @@ export default function CompletedTasks({ tasks }: CompletedTasksProps) {
           {/* right */}
           <div className="flex flex-col items-end justify-between">
             <EllipsisVertical size={18} className="text-gray-500" />
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-1">
               <Calendar className="text-gray-500" size={15} />
               <p className="text-xs text-gray-500">
                 {item.completedAt
