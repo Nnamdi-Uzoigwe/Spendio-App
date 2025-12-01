@@ -14,7 +14,7 @@ export default function ProtectedRoute({
   const [isLoading, setIsLoading] = useState(true);
 
   const API_URL = process.env.NEXT_PUBLIC_API;
-  
+
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem("token");
@@ -26,7 +26,7 @@ export default function ProtectedRoute({
       }
 
       try {
-        const res = await fetch(`${API_URL}/auth/verify`, {
+        const res = await fetch(`${API_URL}/api/auth/verify`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
