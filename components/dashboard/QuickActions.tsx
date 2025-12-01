@@ -20,7 +20,7 @@ export default function QuickActions() {
                     </div>
                 </div>
                 {/* Scan Bill */}
-                <div className="border border-gray-300 rounded-lg p-3">
+                <div className="border border-gray-300 active:opacity-0 rounded-lg p-3">
                     <div className="bg-blue-100 hover:bg-blue-300 p-4 cursor-pointer rounded-lg flex flex-col items-center">
                         <ScanLine className="text-blue-600" />
                         <p className="text-blue-600 font-semibold">Scan Bill</p>
