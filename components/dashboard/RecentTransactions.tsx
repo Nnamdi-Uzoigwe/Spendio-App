@@ -78,13 +78,77 @@
 
 
 
+// "use client";
+
+// import { ArrowDownLeft, ArrowUpRight, Dot } from "lucide-react";
+// import { useFinanceStore } from "@/store/financeStore";
+
+// export default function RecentTransactions() {
+//   // Get latest 5 transactions from the store
+//   const latestTransactions = useFinanceStore((state) => state.latestTransactions());
+
+//   if (!latestTransactions.length) {
+//     return (
+//       <div className="p-4 border border-gray-200 rounded-[20px]">
+//         <h5 className="mb-4 font-semibold text-lg">Recent Transactions</h5>
+//         <p className="text-gray-500">No transactions yet.</p>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div>
+//       <div className="flex justify-between mb-4">
+//         <h5 className="font-semibold text-lg">Recent Transactions</h5>
+//         <button className="text-sm text-indigo-600 hover:underline">See All</button>
+//       </div>
+
+//       <div className="border border-gray-200 overflow-hidden rounded-[20px]">
+//         {latestTransactions.map((item) => (
+//           <div key={item.id} className="flex justify-between border-b border-gray-200 p-4 last:border-b-0">
+//             {/* left */}
+//             <div className="flex gap-3 items-center">
+//               <div
+//                 className={`h-10 w-10 rounded-full flex items-center justify-center ${
+//                   item.isExpense ? "bg-red-100" : "bg-green-100"
+//                 }`}
+//               >
+//                 {item.isExpense ? (
+//                   <ArrowUpRight className="text-red-600" />
+//                 ) : (
+//                   <ArrowDownLeft className="text-green-600" />
+//                 )}
+//               </div>
+//               <div className="flex flex-col">
+//                 <h4 className="font-semibold">{item.description}</h4>
+//                 <p className="text-sm text-gray-500">{item.category}</p>
+//               </div>
+//             </div>
+
+//             {/* right */}
+//             <div className="flex flex-col items-end">
+//               <p className="font-semibold">₦{item.amount.toLocaleString()}</p>
+//               <div className="text-sm flex items-center gap-1">
+//                 <p>{new Date(item.date).toLocaleDateString()}</p>
+//                 <Dot className="w-2 h-2" />
+//                 <p>{new Date(item.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+
 "use client";
 
 import { ArrowDownLeft, ArrowUpRight, Dot } from "lucide-react";
 import { useFinanceStore } from "@/store/financeStore";
 
 export default function RecentTransactions() {
-  // Get latest 5 transactions from the store
+  // Always read store inside component function
   const latestTransactions = useFinanceStore((state) => state.latestTransactions());
 
   if (!latestTransactions.length) {

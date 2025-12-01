@@ -107,6 +107,108 @@
 // }));
 
 
+
+
+
+// import { create } from "zustand";
+
+// interface Transaction {
+//   id: string;
+//   description: string;
+//   category: string;
+//   amount: number;
+//   isExpense: boolean;
+//   date: string; // ISO string
+// }
+
+// interface FinanceState {
+//   income: number;
+//   expenses: number;
+//   balance: number;
+//   loading: boolean;
+//   error: string;
+//   transactions: Transaction[];
+
+//   fetchMonthlyFinance: () => Promise<void>;
+//   addTransaction: (tx: Transaction) => void;
+//   latestTransactions: () => Transaction[];
+// }
+
+// function decodeToken(token: string) {
+//   try {
+//     const base64Url = token.split('.')[1];
+//     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+//     const jsonPayload = decodeURIComponent(
+//       atob(base64)
+//         .split('')
+//         .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+//         .join('')
+//     );
+//     return JSON.parse(jsonPayload);
+//   } catch (error) {
+//     console.error("Failed to decode token:", error);
+//     return null;
+//   }
+// }
+
+// export const useFinanceStore = create<FinanceState>((set, get) => ({
+//   income: 0,
+//   expenses: 0,
+//   balance: 0,
+//   loading: false,
+//   error: "",
+//   transactions: [],
+
+//   fetchMonthlyFinance: async () => {
+//     try {
+//       set({ loading: true, error: "" });
+
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         set({ error: "Not authenticated", loading: false });
+//         return;
+//       }
+
+//       let userId = localStorage.getItem("userId");
+//       if (!userId) {
+//         const decoded = decodeToken(token);
+//         userId = decoded?.userId || decoded?.id || decoded?.sub;
+//         if (!userId) {
+//           set({ error: "Could not extract userId from token", loading: false });
+//           return;
+//         }
+//       }
+
+//       const incomeRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/income/monthly?userId=${userId}`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       });
+//       const incomeData = await incomeRes.json();
+
+//       const expenseRes = await fetch(`${process.env.NEXT_PUBLIC_API}/api/expense/monthly?userId=${userId}`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       });
+//       const expenseData = await expenseRes.json();
+
+//       const income = incomeData.total || 0;
+//       const expenses = expenseData.total || 0;
+//       const balance = income - expenses;
+
+//       set({ income, expenses, balance, loading: false });
+//     } catch (error: any) {
+//       console.error("Finance fetch error:", error);
+//       set({ loading: false, error: error.message || "Failed to fetch finance data" });
+//     }
+//   },
+
+//   // Add a transaction to the array
+//   addTransaction: (tx: Transaction) => set((state) => ({ transactions: [tx, ...state.transactions] })),
+
+//   // Return latest 5 transactions
+//   latestTransactions: () => get().transactions.slice(0, 5),
+// }));
+
+
+
 import { create } from "zustand";
 
 interface Transaction {
@@ -115,7 +217,7 @@ interface Transaction {
   category: string;
   amount: number;
   isExpense: boolean;
-  date: string; // ISO string
+  date: string;
 }
 
 interface FinanceState {
@@ -133,13 +235,13 @@ interface FinanceState {
 
 function decodeToken(token: string) {
   try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
       atob(base64)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
     );
     return JSON.parse(jsonPayload);
   } catch (error) {
@@ -157,6 +259,9 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
   transactions: [],
 
   fetchMonthlyFinance: async () => {
+    // Only run on client
+    if (typeof window === "undefined") return;
+
     try {
       set({ loading: true, error: "" });
 
@@ -197,9 +302,8 @@ export const useFinanceStore = create<FinanceState>((set, get) => ({
     }
   },
 
-  // Add a transaction to the array
-  addTransaction: (tx: Transaction) => set((state) => ({ transactions: [tx, ...state.transactions] })),
+  addTransaction: (tx: Transaction) =>
+    set((state) => ({ transactions: [tx, ...state.transactions] })),
 
-  // Return latest 5 transactions
   latestTransactions: () => get().transactions.slice(0, 5),
 }));
