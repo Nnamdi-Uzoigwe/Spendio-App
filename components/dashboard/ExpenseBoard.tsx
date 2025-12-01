@@ -123,7 +123,6 @@ export default function ExpenseBoard() {
 
   return (
     <div className="bg-black text-white rounded-[20px] p-3 lg:p-6 w-full">
-      {loading && <p className="text-gray-300 mb-4">Loading...</p>}
 
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">

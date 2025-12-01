@@ -10,7 +10,7 @@ export default function BottomNavbar() {
     return (
         <div className="fixed z-30 bg-white bottom-0 text-xs text-gray-600 py-6 px-4 lg:px-40 border-t border-gray-200 w-full flex justify-between items-center">
             {/* Home */}
-            <Link href="/" onClick={() => setActiveLink("/")} className={`${activeLink === "/" ? "bg-black text-white p-4  rounded-full" : "bg-transparent text-black"} w-fit flex flex-col gap-1 items-center`}>
+            <Link href="/" onClick={() => setActiveLink("/")} className={`${activeLink === "/" ? "font-bold" : "bg-transparent text-black"} w-fit flex flex-col gap-1 items-center`}>
                 <House size={18} />
                 <span>Home</span>
             </Link>
