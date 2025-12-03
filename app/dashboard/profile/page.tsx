@@ -339,11 +339,11 @@ export default function Profile() {
       </div>
 
       <div className="mt-10 px-4 lg:px-40">
-        <div className="border border-gray-300 p-6 rounded-[20px] flex justify-between items-center">
+        <div className="border border-gray-300 p-3 lg:p-6 rounded-[20px] flex justify-between items-center">
           {/* Left */}
           <div className="flex gap-3 items-center">
             {/* Avatar */}
-            <div className="bg-black text-white h-16 w-16 rounded-full text-xl flex items-center justify-center">
+            <div className="bg-black text-white h-8 lg:h-16 w-8 lg:w-16 rounded-full text-md lg:text-xl flex items-center justify-center">
               {profile.name.slice(0, 2).toUpperCase()}
             </div>
 

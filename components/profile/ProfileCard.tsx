@@ -11,7 +11,7 @@ export default function ProfileCard({ icon, figure, title }:ProfileCardProps) {
                 {icon}
             </div>
             <h4 className="font-semibold">{figure}</h4>
-            <p className="text-sm text-gray-500">
+            <p className="text-center text-sm text-gray-500">
                 {title}
             </p>
         </div>
