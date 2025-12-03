@@ -102,7 +102,7 @@ export default function AddIncome() {
 
   return (
     <div className="border border-gray-300 p-4 rounded-md">
-      <h2 className="mb-4 text-xl font-semibold">Add Income page</h2>
+      <h2 className="mb-4 text-xl font-semibold text-gray-600">Add Income page</h2>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md mb-4">
@@ -127,10 +127,11 @@ export default function AddIncome() {
             step="0.01"
             min="0"
             placeholder="0.00"
-            className="pl-10 border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            // className="pl-10 border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            className="pl-10 p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             required
           />
-          <span className="absolute top-[45px] text-lg left-4">₦</span>
+          <span className="absolute top-10 lg:top-[45px] text-md lg:text-lg left-4">₦</span>
         </div>
 
         {/* Description */}
@@ -141,7 +142,8 @@ export default function AddIncome() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             placeholder="What was this for?"
             required
           />
@@ -154,7 +156,8 @@ export default function AddIncome() {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             required
           >
             <option value="Salary">Salary</option>
@@ -167,7 +170,7 @@ export default function AddIncome() {
         </div>
 
         {/* Date */}
-        <div>
+        <div className="w-full">
           <p className="font-semibold mb-2">Date</p>
           <input
             type="date"
@@ -175,7 +178,8 @@ export default function AddIncome() {
             value={formData.date}
             onChange={handleChange}
             max={new Date().toISOString().split("T")[0]} // Can't select future dates
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             required
           />
         </div>
@@ -183,7 +187,7 @@ export default function AddIncome() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-2 rounded-md cursor-pointer p-2 w-full bg-black text-white"
+          className="mt-2 rounded-md cursor-pointer p-2 w-full bg-gray-600 hover:bg-gray-800 text-white"
         >
           {loading ? "Adding..." : "Add Income"}
         </button>

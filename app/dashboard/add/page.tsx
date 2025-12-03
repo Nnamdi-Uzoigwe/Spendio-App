@@ -16,28 +16,28 @@ export default function Add() {
                 <Link href="/">
                     <ArrowLeft />
                 </Link>
-                <h4 className="font-semibold text-lg">Add New</h4>
+                <h4 className="font-semibold text-gray-600 text-lg">Add New</h4>
             </header>
 
             {/* Tabs */}
             <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {/* Expense */}
-                <div onClick={() => setActiveTab("Expense")} className={`${activeTab === "Expense" ? "bg-black text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
+                <div onClick={() => setActiveTab("Expense")} className={`${activeTab === "Expense" ? "bg-gray-600 text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
                     <Minus className={`${activeTab === "Expense" ? "text-white" : "text-black"}`} />
                     <span className={`${activeTab === "Expense" ? "text-white" : "text-black"} font-semibold`}>Expense</span>
                 </div>
                 {/* Income */}
-                <div onClick={() => setActiveTab("Income")} className={`${activeTab === "Income" ? "bg-black text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
+                <div onClick={() => setActiveTab("Income")} className={`${activeTab === "Income" ? "bg-gray-600 text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
                     <Plus className={`${activeTab === "Income" ? "text-white" : "text-black"}`} />
                     <span className={`${activeTab === "Income" ? "text-white" : "text-black"} font-semibold`}>Income</span>
                 </div>
                 {/* Scan Bill */}
-                <div onClick={() => setActiveTab("Scan")} className={`${activeTab === "Scan" ? "bg-black text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
+                <div onClick={() => setActiveTab("Scan")} className={`${activeTab === "Scan" ? "bg-gray-600 text-white" : "bg-transparent text-black" } border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
                     <ScanLine className={`${activeTab === "Scan" ? "text-white" : "text-black"}`} />
                     <span className={`${activeTab === "Scan" ? "text-white" : "text-black"} font-semibold`}>Scan Bill</span>
                 </div>
                 {/* Task */}
-                <div onClick={() => setActiveTab("Task")} className={`${activeTab === "Task" ? "bg-black text-white" : "bg-transparent text-black"} border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
+                <div onClick={() => setActiveTab("Task")} className={`${activeTab === "Task" ? "bg-gray-600 text-white" : "bg-transparent text-black"} border border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md flex flex-col items-center p-3 w-full`}>
                     <SquareCheckBig className={`${activeTab === "Task" ? "text-white" : "text-black"}`} />
                     <span className={`${activeTab === "Task" ? "text-white" : "text-black"} font-semibold`}>Task</span>
                 </div>

@@ -95,7 +95,7 @@ export default function AddTask() {
 
   return (
     <div className="border border-gray-300 p-4 rounded-md">
-      <h2 className="mb-4 font-semibold text-xl"> Add Task page</h2>
+      <h2 className="mb-4 font-semibold text-xl text-gray-600"> Add Task page</h2>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md mb-4">
@@ -118,7 +118,8 @@ export default function AddTask() {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             placeholder="What needs to be done?"
             required
           />
@@ -131,7 +132,8 @@ export default function AddTask() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             placeholder="Add more details..."
             required
           ></textarea>
@@ -144,7 +146,8 @@ export default function AddTask() {
             name="priority"
             value={formData.priority}
             onChange={handleChange}
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             required
           >
             <option value="Low">Low</option>
@@ -154,14 +157,15 @@ export default function AddTask() {
         </div>
 
         {/* Date */}
-        <div>
+        <div className="w-full">
           <p className="font-semibold mb-2">Due Date</p>
           <input
             type="date"
             name="dueDate"
             value={formData.dueDate}
             onChange={handleChange}
-            className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+            className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
             required
           />
         </div>
@@ -169,7 +173,7 @@ export default function AddTask() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-2 rounded-md cursor-pointer p-2 w-full bg-black text-white"
+          className="mt-2 rounded-md cursor-pointer p-2 w-full bg-gray-600 hover:bg-gray-800 text-white"
         >
           {loading ? "Adding..." : "Add Task"}
         </button>

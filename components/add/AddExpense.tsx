@@ -127,7 +127,7 @@ export default function AddExpense() {
                         className="pl-10 p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
                         required
                     />
-                    <span className="absolute top-10 text-md lg:text-lg left-4 text-gray-500">₦</span>
+                    <span className="absolute top-10 lg:top-[45px] text-md lg:text-lg left-4 text-gray-500">₦</span>
                 </div>
 
                 {/* Description */}
@@ -167,7 +167,7 @@ export default function AddExpense() {
                 </div>
 
                 {/* Date */}
-                <div>
+                <div className="w-full">
                     <p className="font-semibold mb-2">Date</p>
                     <input 
                         type="date"
@@ -184,7 +184,7 @@ export default function AddExpense() {
                 <button 
                     type="submit"
                     disabled={loading}
-                    className="mt-2 rounded-md cursor-pointer p-2 w-full bg-black text-white hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-semibold"
+                    className="mt-2 rounded-md cursor-pointer p-2 w-full bg-gray-600 text-white hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-semibold"
                 >
                     {loading ? "Adding..." : "Add Expense"}
                 </button>

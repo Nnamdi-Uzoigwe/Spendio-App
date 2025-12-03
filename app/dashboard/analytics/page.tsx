@@ -92,10 +92,10 @@ function AnalyticsCard({ title, amount, percent, icon, trendIcon }: AnalyticsCar
   const isPositive = parseFloat(percent) >= 0;
   
   return (
-    <div className="border border-gray-300 p-4 rounded-lg">
+    <div className="border border-gray-300 p-3 lg:p-4 rounded-lg">
       <div className="mb-3 flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-500">{title}</p>
+          <p className="text-xs lg:text-sm text-gray-500">{title}</p>
           <h3 className={`text-lg font-semibold ${isIncome ? "text-green-500" : "text-black"}`}>
             ₦{amount.toLocaleString()}
           </h3>
@@ -104,7 +104,7 @@ function AnalyticsCard({ title, amount, percent, icon, trendIcon }: AnalyticsCar
           {icon}
         </div>
       </div>
-      <div className={`flex text-sm items-center gap-2 ${
+      <div className={`flex flex-col lg:flex-row text-xs lg:text-sm font-medium items-center gap-1 lg:gap-2 ${
         isIncome 
           ? (isPositive ? "text-green-500" : "text-red-500")
           : (isPositive ? "text-red-500" : "text-green-500")
@@ -188,7 +188,7 @@ export default function Analytics() {
         <h4 className="text-lg text-gray-700 font-semibold">Analytics</h4>
         <button className="border border-gray-300 rounded-md flex items-center gap-2 py-1 px-2">
           <Calendar size={17} />
-          <p>This month</p>
+          <p className="text-sm lg:text-md">This month</p>
         </button>
       </div>
 
