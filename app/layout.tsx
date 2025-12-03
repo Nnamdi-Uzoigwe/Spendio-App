@@ -21,10 +21,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0F172A" />
+
+        {/* iOS Support */}
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        {/* Recommended Extra */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="512x512"
+          href="/icons/icon-512x512.png"
+        />
+      </head>
+
       <body className={`${quicksand.variable} antialiased`}>
-      {/* <Header /> */}
+        {/* <Header /> */}
         {children}
-      {/* <BottomNavbar /> */}
+        {/* <BottomNavbar /> */}
       </body>
     </html>
   );
