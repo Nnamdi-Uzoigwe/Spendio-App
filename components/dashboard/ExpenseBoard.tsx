@@ -122,13 +122,13 @@ export default function ExpenseBoard() {
   }, [fetchMonthlyFinance]); // Added fetchMonthlyFinance to dependency array
 
   return (
-    <div className="bg-black text-white rounded-[20px] p-3 lg:p-6 w-full">
+    <div className="bg-gray-600 text-white rounded-[20px] p-3 lg:p-6 w-full">
 
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div>
             <p className="text-gray-300">Current Balance</p>
-            <h3 className="font-semibold text-2xl">
+            <h3 className="font-semibold text-xl lg:text-2xl">
               {showValues ? `₦${balance.toLocaleString()}` : "*****"}
             </h3>
           </div>
@@ -150,14 +150,14 @@ export default function ExpenseBoard() {
       <div className="mt-10 grid grid-cols-2">
         <div>
           <p className="text-gray-300 text-sm">This month income</p>
-          <h3 className="font-semibold text-lg">
+          <h3 className="font-semibold text-md lg:text-lg">
             {showValues ? `₦${income.toLocaleString()}` : "*****"}
           </h3>
         </div>
 
         <div>
           <p className="text-gray-300 text-sm">This month expenses</p>
-          <h3 className="font-semibold text-lg">
+          <h3 className="font-semibold text-md lg:text-lg">
             {showValues ? `₦${expenses.toLocaleString()}` : "*****"}
           </h3>
         </div>

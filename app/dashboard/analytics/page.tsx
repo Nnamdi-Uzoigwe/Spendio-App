@@ -185,7 +185,7 @@ export default function Analytics() {
   return (
     <div className="">
       <div className="px-4 lg:px-40 py-4 border-b border-gray-300 flex justify-between items-center">
-        <h4 className="text-lg font-semibold">Analytics</h4>
+        <h4 className="text-lg text-gray-700 font-semibold">Analytics</h4>
         <button className="border border-gray-300 rounded-md flex items-center gap-2 py-1 px-2">
           <Calendar size={17} />
           <p>This month</p>
@@ -210,19 +210,19 @@ export default function Analytics() {
         <div className="bg-gray-200 grid p-1 grid-cols-3 gap-1 rounded-[40px] overflow-hidden">
           <div 
             onClick={() => setActiveTab("Overview")} 
-            className={`${activeTab === "Overview" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center py-2 rounded-[40px] text-md font-semibold transition-colors`}
+            className={`${activeTab === "Overview" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center py-1 lg:py-2 rounded-[40px] text-md font-semibold text-gray-700 transition-colors`}
           >
             Overview
           </div>
           <div 
             onClick={() => setActiveTab("Trends")} 
-            className={`${activeTab === "Trends" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center py-2 rounded-[40px] text-md font-semibold transition-colors`}
+            className={`${activeTab === "Trends" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center py-1 lg:py-2 rounded-[40px] text-md font-semibold text-gray-700 transition-colors`}
           >
             Trends
           </div>
           <div 
             onClick={() => setActiveTab("Categories")} 
-            className={`${activeTab === "Categories" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center py-2 rounded-[40px] text-md font-semibold transition-colors`}
+            className={`${activeTab === "Categories" ? "bg-white" : "bg-transparent"} cursor-pointer w-full text-center py-1 lg:py-2 rounded-[40px] text-md font-semibold text-gray-700 transition-colors`}
           >
             Categories
           </div>

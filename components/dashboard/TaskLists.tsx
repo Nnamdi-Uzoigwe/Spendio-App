@@ -73,7 +73,7 @@ export default function TaskLists() {
     <div>
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h5 className="font-semibold">Tasks</h5>
+          <h5 className="font-semibold text-gray-700">Tasks</h5>
           <p className="text-sm text-gray-500">{pendingCount} pending task{pendingCount !== 1 ? "s" : ""}</p>
         </div>
 
@@ -100,7 +100,7 @@ export default function TaskLists() {
             <div className="flex-1">
               <h5
                 className={`mb-2 font-medium ${
-                  item.status === "completed" ? "line-through text-gray-500" : ""
+                  item.status === "completed" ? "line-through text-gray-500" : "text-gray-700"
                 }`}
               >
                 {item.title}

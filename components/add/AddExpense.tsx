@@ -123,10 +123,11 @@ export default function AddExpense() {
                         step="0.01"
                         min="0"
                         placeholder="0.00"
-                        className="pl-10 border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none" 
+                        // className="pl-10 border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none" 
+                        className="pl-10 p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
                         required
                     />
-                    <span className="absolute top-[45px] text-lg left-4 text-gray-500">₦</span>
+                    <span className="absolute top-10 text-md lg:text-lg left-4 text-gray-500">₦</span>
                 </div>
 
                 {/* Description */}
@@ -137,7 +138,8 @@ export default function AddExpense() {
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
-                        className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+                        // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+                        className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
                         placeholder="What was this for?" 
                         required
                     />
@@ -150,7 +152,8 @@ export default function AddExpense() {
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+                        // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none"
+                        className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
                         required
                     >
                         <option value="Food & Dining">Food & Dining</option>
@@ -172,7 +175,8 @@ export default function AddExpense() {
                         value={formData.date}
                         onChange={handleChange}
                         max={new Date().toISOString().split('T')[0]} // Can't select future dates
-                        className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none" 
+                        // className="border-2 border-gray-300 w-full p-2 text-lg rounded-md focus:border-indigo-500 focus:outline-none" 
+                        className="p-2 text-md lg:text-lg bg-[#d8d8d7] outline-gray-400 rounded-md w-full"
                         required
                     />
                 </div>

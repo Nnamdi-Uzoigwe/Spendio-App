@@ -48,7 +48,7 @@ export default function BudgetProgress({ categoryName, amountUsed, threshold }: 
         <div>
             <div className="flex text-sm mb-1 justify-between items-center">
                 <p className="font-medium">{categoryName}</p>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-xs lg:text-sm">
                     ₦{amountUsed.toLocaleString()} / ₦{threshold.toLocaleString()}
                     <span className={`ml-2 text-xs ${
                         percentage >= 90 ? 'text-red-600' : 

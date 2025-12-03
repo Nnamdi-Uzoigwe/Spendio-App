@@ -94,7 +94,7 @@ export default function BudgetOverview() {
     return (
         <div className="mb-20">
             <div className="mt-10 border p-4 mb-10 border-gray-300 rounded-lg">
-                <h3 className="text-lg font-semibold mb-4">Budget Overview</h3>
+                <h3 className="text-lg text-gray-700 font-semibold mb-4">Budget Overview</h3>
 
                 {budgetProgressData.length === 0 ? (
                     <p className="text-gray-500 text-center py-8">
