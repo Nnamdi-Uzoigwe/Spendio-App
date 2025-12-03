@@ -1,5 +1,8 @@
 "use client";
 
+interface IncomeChartProp {
+  data: number[]
+}
 import {
   BarChart,
   Bar,
